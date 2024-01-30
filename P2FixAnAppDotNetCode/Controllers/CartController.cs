@@ -28,7 +28,8 @@ namespace P2FixAnAppDotNetCode.Controllers
 
             if (product != null)
             {
-                _cart.AddItem(product, 1);
+                int orderLineId = GenerateOrderId();
+                _cart.AddItem(orderLineId, product, 1);
                 return RedirectToAction("Index");
             }
             else
@@ -48,5 +49,7 @@ namespace P2FixAnAppDotNetCode.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
     }
 }

@@ -3,7 +3,7 @@ namespace P2FixAnAppDotNetCode.Models
 {
     public interface ICart
     {
-        void AddItem(Product product, int quantity);
+        void AddItem(int orderCartLine, Product product, int quantity);
 
         void RemoveLine(Product product);
 
