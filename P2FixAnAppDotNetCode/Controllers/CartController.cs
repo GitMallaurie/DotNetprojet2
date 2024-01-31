@@ -9,11 +9,13 @@ namespace P2FixAnAppDotNetCode.Controllers
     {
         private readonly ICart _cart;
         private readonly IProductService _productService;
+     
 
+ 
         public CartController(ICart pCart, IProductService productService)
         {
             _cart = pCart;
-            _productService = productService;
+            _productService = productService;      
         }
 
         public ViewResult Index()
@@ -27,9 +29,9 @@ namespace P2FixAnAppDotNetCode.Controllers
             Product product = _productService.GetProductById(id);
 
             if (product != null)
-            {
-                int orderLineId = GenerateOrderId();
-                _cart.AddItem(orderLineId, product, 1);
+            {            
+                _cart.GenerateOrderId();
+                _cart.AddItem(product, 1);
                 return RedirectToAction("Index");
             }
             else

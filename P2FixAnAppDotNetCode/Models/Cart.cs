@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace P2FixAnAppDotNetCode.Models
@@ -8,7 +9,15 @@ namespace P2FixAnAppDotNetCode.Models
     /// </summary>
     public class Cart : ICart
     {
-        private List<CartLine> listCartLine = new List<CartLine>();
+        private List<CartLine> listCartLines = new List<CartLine>();
+
+        public int OrderId { get; private set; }
+
+        public Cart()
+        {
+           OrderId = GenerateOrderId();
+        }
+
 
         /// <summary>
         /// Read-only property for display only
@@ -22,16 +31,18 @@ namespace P2FixAnAppDotNetCode.Models
         /// <returns></returns>
         private List<CartLine> GetCartLineList()
         {
-            return listCartLine;
+            return listCartLines;
         }
+
         /// <summary>
         /// Adds a product in the cart or increment its quantity in the cart if already added
         /// </summary>//
-        public void AddItem(int orderLineId, Product product, int quantity)
+        public void AddItem(Product product, int quantity)
         {
             bool productExistsInCart = false;
 
-            foreach (var cartLine in listCartLine)
+
+            foreach (var cartLine in listCartLines)
             {
                 if (cartLine.Product == product)
                 {
@@ -43,9 +54,10 @@ namespace P2FixAnAppDotNetCode.Models
 
             if (!productExistsInCart)
             {
-                var newCartLine = new CartLine(orderLineId, product, quantity);
-                listCartLine.Add(newCartLine);
-            }
+
+                var newCartLine = new CartLine(product, quantity);
+                listCartLines.Add(newCartLine);
+            }         
         }
 
         /// <summary>
@@ -59,10 +71,9 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetTotalValue()
         {
-
             double totalValue = 0.0;
 
-            foreach (var cartLine in listCartLine)
+            foreach (var cartLine in listCartLines)
             {
                 Product product = cartLine.Product;
                 totalValue += (product.Price);
@@ -76,14 +87,14 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetAverageValue()
         {
-            if (listCartLine.Count == 0)
+            if (listCartLines.Count == 0)
             {
                 return 0.0;
             }
 
             double total = GetTotalValue();
 
-            double average = total / listCartLine.Count;
+            double average = total / listCartLines.Count;
 
             return average;
         }
@@ -93,7 +104,13 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public Product FindProductInCartLines(int productId)
         {
-            // TODO implement the method
+            foreach (var cartLine in listCartLines)
+            {
+                if (cartLine.Product.Id == productId)
+                {
+                   return cartLine.Product;
+                }
+            }
             return null;
         }
 
@@ -114,32 +131,33 @@ namespace P2FixAnAppDotNetCode.Models
             cartLines.Clear();
         }
 
+        /// <summary>
+        /// Generate an ID for the cart
+        /// </summary>
+        /// <returns></returns>
         public int GenerateOrderId()
         {
             int maxOrderId = 0;
 
-            foreach (var CartLine in listCartLine)
+            foreach (var cartLine in listCartLines)
             {
-                if (CartLine.OrderLineId > maxOrderId)
+                if (OrderId > maxOrderId)
                 {
-                    maxOrderId = CartLine.OrderLineId;
+                    maxOrderId = OrderId;
                 }
             }
             return maxOrderId + 1;
         }
     }
 
-
-
     public class CartLine
     {
-        public int OrderLineId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
 
-        public CartLine(int orderLineId, Product product, int quantity)
+        public CartLine(Product product, int quantity)
         {
-            OrderLineId = orderLineId;
+     
             Product = product;
             Quantity = quantity;
         }

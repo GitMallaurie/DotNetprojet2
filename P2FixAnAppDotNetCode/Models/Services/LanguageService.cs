@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using System;
 
 namespace P2FixAnAppDotNetCode.Models.Services
 {
@@ -18,14 +19,21 @@ namespace P2FixAnAppDotNetCode.Models.Services
         }
 
         /// <summary>
-        /// Set the culture
+        /// Set the culture, EN as default
         /// </summary>
         public string SetCulture(string language)
         {
-            string culture = "";
-            // TODO complete the code 
-            // Default language is "en", french is "fr" and spanish is "es".
-            
+            string culture = "en-EN";
+
+            if (string.Equals(language, "fr"))
+            {
+                culture = "fr-FR";
+            }
+            if (string.Equals(language, "es"))
+            {
+                culture = "es-ES";
+            }
+      
             return culture;
         }
 
