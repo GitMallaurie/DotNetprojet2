@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.NodeServices.HostingModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -44,7 +45,7 @@ namespace P2FixAnAppDotNetCode.Models
 
             foreach (var cartLine in listCartLines)
             {
-                if (cartLine.Product == product)
+                if (cartLine.Product.Id == product.Id)
                 {
                     cartLine.Quantity += quantity;
                     productExistsInCart = true;
@@ -73,10 +74,11 @@ namespace P2FixAnAppDotNetCode.Models
         {
             double totalValue = 0.0;
 
-            foreach (var cartLine in listCartLines)
+            foreach (var lignedemonpanier in listCartLines)
             {
-                Product product = cartLine.Product;
-                totalValue += (product.Price);
+                double totaldemaligne = 0.0;
+                totaldemaligne += lignedemonpanier.Product.Price * System.Convert.ToDouble(lignedemonpanier.Quantity);
+                totalValue += totaldemaligne;
             }
 
             return totalValue;
@@ -93,8 +95,16 @@ namespace P2FixAnAppDotNetCode.Models
             }
 
             double total = GetTotalValue();
+            
+            var totaldeproduit = 0;
 
-            double average = total / listCartLines.Count;
+            foreach (var cartLine in listCartLines)
+            {
+                totaldeproduit += cartLine.Quantity;
+
+            }
+
+            double average = total / totaldeproduit;
 
             return average;
         }
