@@ -74,11 +74,11 @@ namespace P2FixAnAppDotNetCode.Models
         {
             double totalValue = 0.0;
 
-            foreach (var lignedemonpanier in listCartLines)
+            foreach (var cartLine in listCartLines)
             {
-                double totaldemaligne = 0.0;
-                totaldemaligne += lignedemonpanier.Product.Price * System.Convert.ToDouble(lignedemonpanier.Quantity);
-                totalValue += totaldemaligne;
+                double totalLine = 0.0;
+                totalLine += cartLine.Product.Price * System.Convert.ToDouble(cartLine.Quantity);
+                totalValue += totalLine;
             }
 
             return totalValue;

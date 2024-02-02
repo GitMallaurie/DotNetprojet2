@@ -117,35 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Average" xml:space="preserve">
-    <value>Promedio</value>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>Inglés</value>
   </data>
-  <data name="Checkout" xml:space="preserve">
-    <value>Ordenar</value>
+  <data name="LanguageFrench" xml:space="preserve">
+    <value>Francés</value>
   </data>
-  <data name="ContinueShopping" xml:space="preserve">
-    <value>Seguir comprando</value>
-  </data>
-  <data name="Item" xml:space="preserve">
-    <value>Producto</value>
-  </data>
-  <data name="Price" xml:space="preserve">
-    <value>Premio</value>
-  </data>
-  <data name="Quantity" xml:space="preserve">
-    <value>Cantidad</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Borrar</value>
-  </data>
-  <data name="Subtotal" xml:space="preserve">
-    <value>Total parcial</value>
-  </data>
-  <data name="YourCart" xml:space="preserve">
-    <value>Su cesta</value>
-  </data>
-  <data name="Total" xml:space="preserve">
-    <value>Total</value>
-    <comment>Total</comment>
+  <data name="LanguageSpanish" xml:space="preserve">
+    <value>Español</value>
   </data>
 </root>

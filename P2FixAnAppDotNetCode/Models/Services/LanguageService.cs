@@ -23,15 +23,19 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public string SetCulture(string language)
         {
-            string culture = "en-EN";
+            string culture = "English";
 
-            if (string.Equals(language, "fr"))
+            if (string.Equals(language, "French"))
             {
-                culture = "fr-FR";
+                culture = "fr";
             }
-            if (string.Equals(language, "es"))
+            if (string.Equals(language,"Spanish"))
             {
-                culture = "es-ES";
+                culture = "es";
+            }
+            else if (string.Equals(language, "English"))
+            {
+                culture = "en";
             }
       
             return culture;

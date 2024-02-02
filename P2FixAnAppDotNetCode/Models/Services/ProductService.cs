@@ -31,7 +31,9 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public Product GetProductById(int id)
         {
-            return null;
+           
+            
+            
         }
 
         /// <summary>
@@ -39,13 +41,7 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public void UpdateProductQuantities(Cart cart)
         {
-            //foreach (Cart cartLine in listCartLine)
-            //{
-            //   //if{ Product.Quantities == 0}
-            //   // {
-            //   //    return = null;
-            //   // }
-            //}
+          
         }
     }
 }
