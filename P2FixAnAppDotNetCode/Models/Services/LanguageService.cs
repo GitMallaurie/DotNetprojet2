@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace P2FixAnAppDotNetCode.Models.Services
 {
@@ -8,14 +12,14 @@ namespace P2FixAnAppDotNetCode.Models.Services
     /// Provides services method to manage the application language
     /// </summary>
     public class LanguageService : ILanguageService
-    {
+    {   
         /// <summary>
         /// Set the UI language
         /// </summary>
         public void ChangeUiLanguage(HttpContext context, string language)
         {
             string culture = SetCulture(language);
-            UpdateCultureCookie(context, culture);
+            UpdateCultureCookie(context, culture);           
         }
 
         /// <summary>
@@ -23,8 +27,8 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public string SetCulture(string language)
         {
-            string culture = "English";
-
+            string culture = "en";      
+            
             if (string.Equals(language, "French"))
             {
                 culture = "fr";
@@ -36,9 +40,9 @@ namespace P2FixAnAppDotNetCode.Models.Services
             else if (string.Equals(language, "English"))
             {
                 culture = "en";
-            }
-      
-            return culture;
+            }   
+            
+            return culture;          
         }
 
         /// <summary>

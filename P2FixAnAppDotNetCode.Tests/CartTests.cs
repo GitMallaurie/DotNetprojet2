@@ -17,7 +17,7 @@ namespace P2FixAnAppDotNetCode.Tests
         public void AddItemInCart()
         {
             Cart cart = new Cart();
-            int orderLineId = cart.GenerateOrderId();
+
             Product product1 = new Product(1, 0, 20, "name", "description");
             Product product2 = new Product(1, 0, 20, "name", "description");
 
@@ -36,7 +36,6 @@ namespace P2FixAnAppDotNetCode.Tests
             IProductRepository productRepository = new ProductRepository();
             IOrderRepository orderRepository = new OrderRepository();
             IProductService productService = new ProductService(productRepository, orderRepository);
-
             IEnumerable<Product> products = productService.GetAllProducts();
             cart.AddItem(products.First(p => p.Id == 2), 2);
             cart.AddItem( products.First(p => p.Id == 5), 1);
@@ -50,11 +49,10 @@ namespace P2FixAnAppDotNetCode.Tests
         public void GetTotalValue()
         {
             ICart cart = new Cart();
-            int orderLineId = cart.GenerateOrderId();
+   
             IProductRepository productRepository = new ProductRepository();
             IOrderRepository orderRepository = new OrderRepository();
             IProductService productService = new ProductService(productRepository, orderRepository);
-
             IEnumerable<Product> products = productService.GetAllProducts();
             cart.AddItem(products.First(p => p.Id == 1), 1);
             cart.AddItem(products.First(p => p.Id == 4), 3);
@@ -69,9 +67,7 @@ namespace P2FixAnAppDotNetCode.Tests
         public void FindProductInCartLines()
         {
             Cart cart = new Cart();
-            int orderLineId = cart.GenerateOrderId();
             Product product = new Product(999, 0, 20, "name", "description");
-
             cart.AddItem(product, 1);
             Product result = cart.FindProductInCartLines(999);
 
