@@ -40,10 +40,10 @@ namespace P2FixAnAppDotNetCode.Controllers
             }
         }
 
-        public ViewResult Completed()
+        public RedirectToActionResult Completed()
         {
             _cart.Clear();
-            return View();
+            return RedirectToAction("Index", "Product");
         }
     }
 }
