@@ -69,7 +69,7 @@ namespace P2FixAnAppDotNetCode.Tests
             Cart cart = new Cart();
             Product product = new Product(999, 0, 20, "name", "description");
             cart.AddItem(product, 1);
-            Product result = cart.FindProductInCartLines(999);
+            CartLine result = cart.FindProductInCartLines(999);
 
             Assert.NotNull(result);
         }
