@@ -19,12 +19,10 @@ namespace P2FixAnAppDotNetCode.Models
            OrderId = GenerateOrderId();
         }
 
-
         /// <summary>
         /// Read-only property for display only
         /// </summary>
         public IEnumerable<CartLine> Lines => GetCartLineList();
-
 
         /// <summary>
         /// Return the actual cartline list
@@ -40,25 +38,17 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            bool productExistsInCart = false;
+            CartLine existingCartLine = FindProductInCartLines(product.Id);
 
-
-            foreach (var cartLine in listCartLines)
+            if (existingCartLine != null)
             {
-                if (cartLine.Product.Id == product.Id)
-                {
-                    cartLine.Quantity += quantity;
-                    productExistsInCart = true;
-                    break;
-                }
+                existingCartLine.Quantity += quantity;
             }
-
-            if (!productExistsInCart)
+            else
             {
-
                 var newCartLine = new CartLine(product, quantity);
                 listCartLines.Add(newCartLine);
-            }         
+            }
         }
 
         /// <summary>
@@ -95,16 +85,15 @@ namespace P2FixAnAppDotNetCode.Models
             }
 
             double total = GetTotalValue();
-            
-            var totaldeproduit = 0;
+
+            var totalOfProduct = 0;
 
             foreach (var cartLine in listCartLines)
             {
-                totaldeproduit += cartLine.Quantity;
-
+                totalOfProduct += cartLine.Quantity;
             }
 
-            double average = total / totaldeproduit;
+            double average = total / totalOfProduct;
 
             return average;
         }
@@ -112,13 +101,13 @@ namespace P2FixAnAppDotNetCode.Models
         /// <summary>
         /// Looks after a given product in the cart and returns if it finds it
         /// </summary>
-        public Product FindProductInCartLines(int productId)
+        public CartLine FindProductInCartLines(int productId)
         {
             foreach (var cartLine in listCartLines)
             {
                 if (cartLine.Product.Id == productId)
                 {
-                   return cartLine.Product;
+                    return cartLine;
                 }
             }
             return null;
@@ -167,7 +156,7 @@ namespace P2FixAnAppDotNetCode.Models
 
         public CartLine(Product product, int quantity)
         {
-     
+
             Product = product;
             Quantity = quantity;
         }
