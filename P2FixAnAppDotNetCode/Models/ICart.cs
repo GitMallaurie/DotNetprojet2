@@ -7,7 +7,7 @@ namespace P2FixAnAppDotNetCode.Models
 
         void RemoveLine(Product product);
 
-        Product FindProductInCartLines(int productId);
+        CartLine FindProductInCartLines(int productId);
 
         void Clear();
 
